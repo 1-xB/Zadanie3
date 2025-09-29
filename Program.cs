@@ -7,7 +7,9 @@ class Program
         string[] names = new string[] { "Ania", "Kasia", "Basia", "Zosia" };
         string[] surnames = new string[] { "Kowalska", "Nowak" };
 
-        using StreamWriter writer = new("dane.csv", false);
+        string filePath = $"dane-{DateTime.Now.ToString("dd_MM_yyyy_HH_mm")}.csv";
+        
+        using StreamWriter writer = new(filePath, false);
         writer.WriteLine("lp,name,surname,birthYear");
         Random random = new();
         for (int i = 1; i < 101; i++)
@@ -16,5 +18,7 @@ class Program
             var surname = surnames[random.Next(0, surnames.Length)];
             writer.WriteLine($"{i},{name},{surname},{random.Next(1989,2001)}");
         }
+
+        Console.WriteLine("Plik został zapisany w " + Path.GetFullPath(filePath));
     }
 }
